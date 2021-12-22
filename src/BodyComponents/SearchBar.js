@@ -50,17 +50,23 @@ const SearchBar = () => {
 const Search = styled.input`
   background-color: white;
   padding: 0.5rem;
+  padding-left: 2rem;
   border-radius: 1rem;
-  width: 50%;
+  width: 20%;
   border: none;
   outline: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   font-style: italic;
+  transition: 1s all;
+  :focus {
+    width: 30%;
+  }
 `;
 const Button = styled.button`
   background-color: #18f1f1;
   margin-left: -1.5rem;
   margin-top: 0.1rem;
-  height: 1.938rem;
+  height: 2rem;
   width: 5rem;
   border: none;
   border-top-right-radius: 5em;
