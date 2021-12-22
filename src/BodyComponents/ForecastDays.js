@@ -3,109 +3,56 @@ import styled from 'styled-components';
 import { useGlobalContext } from '../Weather/context';
 import Loading from './Loading';
 const ForecastDays = () => {
-  const { weather, loading } = useGlobalContext();
+  const { weather, loading, weekdays } = useGlobalContext();
   if (loading) {
     return <Loading />;
   }
-  var weekdays = new Array(7);
-  weekdays[0] = 'Sunday';
-  weekdays[1] = 'Monday';
-  weekdays[2] = 'Tuesday';
-  weekdays[3] = 'Wednesday';
-  weekdays[4] = 'Thursday';
-  weekdays[5] = 'Friday';
-  weekdays[6] = 'Saturday';
 
-  // const data = weather.map((item, index) => {
-  //   const { date, main, weather } = item;
+  var newWeathers = new Array(5);
+  newWeathers[0] = weather[7];
+  newWeathers[1] = weather[15];
+  newWeathers[2] = weather[23];
+  newWeathers[3] = weather[31];
+  newWeathers[4] = weather[38];
+  console.log(newWeathers);
 
-  //   const day = weekdays[new Date(date).getDay()];
-  //   console.log(day);
-  //   return { date, main, weather };
-  // });
-  const iconCode = `http://openweathermap.org/img/w/${weather[7].weather
-    .map((item) => item.icon)
-    .toString()}.png`;
-  const iconCode1 = `http://openweathermap.org/img/w/${weather[15].weather
-    .map((item) => item.icon)
-    .toString()}.png`;
-  const iconCode2 = `http://openweathermap.org/img/w/${weather[23].weather
-    .map((item) => item.icon)
-    .toString()}.png`;
-  const iconCode3 = `http://openweathermap.org/img/w/${weather[31].weather
-    .map((item) => item.icon)
-    .toString()}.png`;
-  const iconCode4 = `http://openweathermap.org/img/w/${weather[38].weather
-    .map((item) => item.icon)
-    .toString()}.png`;
-
-  // for (let i = 7; i < weather.length; i = i + 7) {
-  //   const iconCode = `http://openweathermap.org/img/w/"${weather[7].weather.map(
-  //     (item) => item.icon
-  //   )}.png`;
-  //   return (
-  //     <Section>
-  //       <div>Day: {weekdays[new Date(weather[i].date).getDay()]}</div>
-  //       <img src={iconCode} alt="icon"></img>
-  //       <span>Temp-min: {weather[i].main.temp_min}&#8451;</span>
-  //       <span>Temp-max: {weather[i].main.temp_max}&#8451;</span>
-  //     </Section>
-  //   );
-  // }
-  return (
-    <Div>
-      <Section>
-        <div>Day: {weekdays[new Date(weather[7].date).getDay()]}</div>
+  const obj = newWeathers.map((item, index) => {
+    const { date, main, weather } = item;
+    const description = weather.map((item) => item.description);
+    const iconCode = `http://openweathermap.org/img/w/${weather.map(
+      (item) => item.icon
+    )}.png`;
+    return (
+      <Section key={index}>
+        <Div>{weekdays[new Date(date).getDay()]}</Div>
         <Img src={iconCode} alt="icon" />
-        <span>Temp-min: {weather[7].main.temp_min}&#8451;</span>
-        <span>Temp-max: {weather[7].main.temp_max}&#8451;</span>
+        <span style={{ textTransform: 'uppercase' }}> {description}</span>
+        <span>Temp-min: {main.temp_min}&#8451;</span>
+        <span>Temp-max: {main.temp_max}&#8451;</span>
       </Section>
-      <Section>
-        <div>Day: {weekdays[new Date(weather[15].date).getDay()]}</div>
-        <Img src={iconCode1} alt="icon" />
-        <span>Temp-min: {weather[15].main.temp_min}&#8451;</span>
-        <span>Temp-max: {weather[15].main.temp_max}&#8451;</span>
-      </Section>
-      <Section>
-        <div>Day: {weekdays[new Date(weather[23].date).getDay()]}</div>
-        <Img src={iconCode2} alt="icon" />
-        <span>Temp-min: {weather[23].main.temp_min}&#8451;</span>
-        <span>Temp-max: {weather[23].main.temp_max}&#8451;</span>
-      </Section>
-      <Section>
-        <div>Day: {weekdays[new Date(weather[31].date).getDay()]}</div>
-        <Img src={iconCode3} alt="icon" />
-        <span>Temp-min: {weather[31].main.temp_min}&#8451;</span>
-        <span>Temp-max: {weather[31].main.temp_max}&#8451;</span>
-      </Section>
-      <Section>
-        <div>Day: {weekdays[new Date(weather[38].date).getDay()]}</div>
-        <Img src={iconCode4} alt="icon" />
-        <span>Temp-min: {weather[38].main.temp_min}&#8451;</span>
-        <span>Temp-max: {weather[38].main.temp_max}&#8451;</span>
-      </Section>
-    </Div>
-  );
+    );
+  });
+  return <Div>{obj}</Div>;
 };
-const Section = styled.section`
-  background-color: #18f1f1;
-  opacity: 0.5;
+const Section = styled.div`
+  background-color: rgba(48, 246, 246, 0.2);
+  opacity: 0.9;
   border-radius: 1rem;
-  height: 30vh;
-  width: 15%;
-
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  flex-wrap: wrap;
   margin: 0 auto;
   margin-top: 2em;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-
+  padding: 2rem;
   text-align: center;
-  min-width: 10%;
+  min-width: 15%;
 `;
 const Div = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 `;
 const Img = styled.img`
