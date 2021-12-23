@@ -4,7 +4,6 @@ import { useGlobalContext } from '../Weather/context';
 import Loading from './Loading';
 const ForecastCard = () => {
   const { weather, loading, weekdays, cityName } = useGlobalContext();
-  console.log(weather);
 
   if (loading) {
     return <Loading />;
@@ -12,9 +11,9 @@ const ForecastCard = () => {
   const img = weather[0].weather.map((item) => item.icon).toString();
   const iconCode = `http://openweathermap.org/img/w/${img}.png`;
   const description = weather[0].weather.map((item) => item.description);
-  const des =
-    description.toString().charAt(0).toUpperCase() + description.slice(1);
-  console.log(des);
+  // const des =
+  //   description.toString().charAt(0).toUpperCase() + description.slice(1);
+
   return (
     <Box>
       <BoxOne>

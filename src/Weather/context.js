@@ -18,7 +18,7 @@ const AppProvider = ({ children }) => {
   weekdays[6] = 'Saturday';
 
   //Fetching data from api
-  console.log(process.env.API_KEY);
+  // console.log(process.env.API_KEY);
   const fetchWeather = async (name) => {
     setLoading(true);
     try {

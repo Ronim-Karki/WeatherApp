@@ -4,6 +4,7 @@ import { useGlobalContext } from '../Weather/context';
 import Loading from './Loading';
 const ForecastDays = () => {
   const { weather, loading, weekdays } = useGlobalContext();
+  console.log(weather);
   if (loading) {
     return <Loading />;
   }
@@ -13,8 +14,7 @@ const ForecastDays = () => {
   newWeathers[1] = weather[15];
   newWeathers[2] = weather[23];
   newWeathers[3] = weather[31];
-  newWeathers[4] = weather[38];
-  console.log(newWeathers);
+  newWeathers[4] = weather[39];
 
   const obj = newWeathers.map((item, index) => {
     const { date, main, weather } = item;

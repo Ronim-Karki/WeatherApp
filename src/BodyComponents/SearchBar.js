@@ -61,6 +61,9 @@ const Search = styled.input`
   :focus {
     width: 30%;
   }
+  @media (max-width: 768px) {
+    width: 50%;
+  }
 `;
 const Button = styled.button`
   background-color: #18f1f1;
